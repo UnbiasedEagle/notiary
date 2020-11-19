@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Router, Switch, Route } from 'react-router-dom';
+import history from './history';
+import Navbar from './components/Navbar';
+import NoteList from './screens/NoteList';
+import NoteEdit from './screens/NoteEdit';
+import NoteDelete from './screens/NoteDelete';
+import NoteCreate from './screens/NoteCreate';
+import NoteShow from './screens/NoteShow';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Navbar></Navbar>
+      <div className='container'>
+        <Switch>
+          <Route path='/' exact component={NoteList}></Route>
+          <Route path='/notes/new' exact component={NoteCreate}></Route>
+          <Route path='/notes/edit/:id' exact component={NoteEdit}></Route>
+          <Route path='/notes/:id' exact component={NoteShow}></Route>
+          <Route path='/notes/delete/:id' exact component={NoteDelete}></Route>
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
